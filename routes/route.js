@@ -15,3 +15,31 @@ exports.main = function(req, res){
         }
     });
 }
+
+exports.delEmployee = function(req, res){
+    console.log('received req is->' + req.body.email)
+    employee.findOneAndRemove(req.body.email, function(err){
+        if (err != null) {
+            msg = 'no such entry found';
+            res.send(err);
+        } else {
+            console.log('employee details deleted');
+            res.status(200).send('employee details deleted');
+        }
+
+    })
+}
+
+exports.update = function(req, res){
+    console.log('received req from update post is -> '+ req.body.department);
+    employee.findOneAndUpdate(req.body.email, {$set: {name : req.body.name, DOB: req.body.DOB, department: req.body.department, gender: req.body.gender, age: req.body.age}} , function(err){
+        console.log('inside the mongo command' + err)
+        if (err != null) {
+            msg = 'no such entry found';
+            res.send(err);
+        } else {
+            console.log('employee details updated');
+            res.status(200);
+        }        
+    })
+}
