@@ -17,6 +17,7 @@ var routes = require('./routes/route.js');
 app.get('/',routes.main);
 app.post('/del', routes.delEmployee);
 app.post('/update', routes.update);
+app.post('/create', routes.create);
 
 app.listen(port, function(req, res){
     console.log('app is listening');
